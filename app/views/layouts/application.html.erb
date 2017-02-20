@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PersonalBlog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= link_to 'Home', root_path %>
+    <%= link_to 'Skills', static_pages_skill_path %>
+    <%= link_to 'Experience', static_pages_experience_path %>
+    <%= link_to 'Education', static_pages_education_path %>
+    <%= link_to 'Blog', blogs_path %>
+    <%= link_to 'About', static_pages_about_path %>
+    <%= yield %>
+  </body>
+</html>
