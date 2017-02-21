@@ -1,32 +1,56 @@
-<%= form_for(blog) do |f| %>
-  <% if blog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+<%= form_for @blog, :html => { :class => "form-horizontal blog" } do |f| %>
 
-      <ul>
-      <% blog.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @blog.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @blog.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :para_heading, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :para_heading, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:para_heading) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paragraph, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :paragraph, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:paragraph) %>
   </div>
 
-  <div class="field">
-    <%= f.label :para_heading %>
-    <%= f.text_field :para_heading %>
+  <div class="form-group">
+    <%= f.label :created_by, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :created_by, :class => 'form-control' %>
+      </div>
+    <%=f.error_span(:created_by) %>
   </div>
 
-  <div class="field">
-    <%= f.label :paragraph %>
-    <%= f.text_field :paragraph %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                blogs_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

@@ -1,31 +1,51 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Blog -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <header class = "blog-header" style= "background-image: url('images/home-bg.jpg')">
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-lg-8 col-lg-offset-2">
+				<div class = "blog-heading">
+					<h1>My Blog</h1>
+					<h6>This blog contains my studies and conclusions in different area of my interest</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+</div>
+<div class="parallax-pattern-overlay">
+  <div class = "container">
+    <div class = "row">
+		    <div class = "col-lg-8 col-lg-offset-2">
+          <h4 class = "education-title">My Blog</h4>
+          <div class="modal-body modal-spa">
+            <div class="experience">
+              <div class = "blog-common">
+                  <% @blogs.each do |blog| %>
+                    <h2 class = "blog-title"><%= link_to blog.title, blog_path(blog) %></h2>
 
-<h1>Blogs</h1>
+                    <p class = blog-by>
+                      <%= blog.created_by %><%=l blog.created_at %>
+                    </p>
+                    <br>
+                    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                edit_blog_path(blog), :class => 'btn btn-default btn-xs' %>
+                    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                blog_path(blog),
+                                :method => :delete,
+                                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                                :class => 'btn btn-xs btn-danger' %>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+          </h4>
+        </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Para heading</th>
-      <th>Paragraph</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.para_heading %></td>
-        <td><%= blog.paragraph %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Blog', new_blog_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_blog_path,
+            :class => 'btn btn-primary' %>
